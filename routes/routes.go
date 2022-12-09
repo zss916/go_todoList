@@ -11,23 +11,28 @@ import (
 	"to-do-list/middleware"
 )
 
-//路由配置
+// 路由配置
 func NewRouter() *gin.Engine {
 	r := gin.Default() //生成了一个WSGI应用程序实例
 	store := cookie.NewStore([]byte("something-very-secret"))
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler)) // 开启swag
 	r.Use(sessions.Sessions("mysession", store))
+	///跨域，(是解决不同浏览器对接口请求的限;如果直接服务端请求,是不会触发跨域限制的)
 	r.Use(middleware.Cors())
+	///分组
 	v1 := r.Group("api/v1")
 	{
+		///ping 请求
 		v1.GET("ping", func(c *gin.Context) {
 			c.JSON(200, "success")
 		})
 		// 用户操作
 		v1.POST("user/register", api.UserRegister)
 		v1.POST("user/login", api.UserLogin)
+		///再次分一组
 		authed := v1.Group("/") //需要登陆保护
 		authed.Use(middleware.JWT())
+		//authed.Use(middleware.NetLog())
 		{
 			//任务操作
 			authed.GET("tasks", api.ListTasks)

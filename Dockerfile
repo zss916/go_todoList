@@ -1,4 +1,4 @@
-FROM golang:1.16 as builder
+FROM golang:1.19 as builder
 
 ENV GO111MODULE=on \
     GOPROXY=https://goproxy.cn,direct
@@ -20,3 +20,6 @@ COPY --from=builder /app/publish .
 ENV GIN_MODE=release
 EXPOSE 3000
 ENTRYPOINT ["./main"]
+
+##mysql ,redis 是golang 中不同服务，如果单个golang 服务我用dockerFile 容器启动就行，但是项目中有mysql和redis等服务，
+##需要多服务启动那就用到docker-compose.yml

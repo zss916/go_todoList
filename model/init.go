@@ -9,8 +9,10 @@ import (
 	"time"
 )
 
+// 暴露出来全局都能使用
 var DB *gorm.DB
 
+// /gorm 操作本地数据库
 func Database(conn string) {
 	var ormLogger logger.Interface
 	if gin.Mode() == "debug" {
@@ -28,7 +30,7 @@ func Database(conn string) {
 	}), &gorm.Config{
 		Logger: ormLogger, // 打印日志
 		NamingStrategy: schema.NamingStrategy{
-			SingularTable: true, // 表明不加s
+			SingularTable: true, // 表名不加s,(不设置一般表会自动名字后面加s)
 		},
 	})
 	if err != nil {
@@ -61,3 +63,6 @@ func Database(connString string) {
 	migration()
 }
 */
+
+// 操作数据库 可以使用go-gorm 或者 go-xorm 两个插件，文档全面性gorm > xorm > gorose。国内目前gorm 使用更多一点
+//gorm 使用地址:https://gorm.io/docs/index.html

@@ -8,24 +8,24 @@ import (
 	"strconv"
 )
 
-//RedisClient Redis缓存客户端单例
+// RedisClient Redis缓存客户端单例
 var (
 	RedisClient *redis.Client
-	RedisAddr  			string
-	RedisPw    			string
-	RedisDbName    		string
+	RedisAddr   string
+	RedisPw     string
+	RedisDbName string
 )
 
 func init() {
 	file, err := ini.Load("conf/config.ini")
 	if err != nil {
-		fmt.Println("配置文件读取错误，请检查文件路径:", err)
+		fmt.Println("redis配置文件读取错误，请检查文件路径:", err)
 	}
 	LoadRedis(file)
 	Redis()
 }
 
-//初始化redis链接
+// 初始化redis链接
 func Redis() {
 	db, _ := strconv.ParseUint(RedisDbName, 10, 64)
 	client := redis.NewClient(&redis.Options{

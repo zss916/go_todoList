@@ -1,0 +1,23 @@
+###
+
+# curl -X 'GET'
+#  'http://localhost:3000/api/v1/tasks'
+#  -H 'accept: application/json'
+#  -H 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJ1c2VyMSIsImF1dGhvcml0eSI6MCwiZXhwIjoxNjcwMDQ1NzUyLCJpc3MiOiJ0by1kby1saXN0In0.VGOssysitJwoXMGGIFuG1yewRprz9lQnVmHgkar4FtY'
+#  -H 'Content-Type: application/json'
+#  -d '{
+#  "limit": 0,
+#  "start": 0
+#}'
+GET http://192.168.7.107:3000/api/v1/tasks
+accept: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJ1c2VyMSIsImF1dGhvcml0eSI6MCwiZXhwIjoxNjcwMDQ1NzUyLCJpc3MiOiJ0by1kby1saXN0In0.VGOssysitJwoXMGGIFuG1yewRprz9lQnVmHgkar4FtY
+Content-Type: application/json
+
+{
+  "limit": 0,
+  "start": 0
+}
+
+###
+

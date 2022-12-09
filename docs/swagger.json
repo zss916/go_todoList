@@ -10,14 +10,16 @@
     "paths": {
         "/search": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
-                ],
-                "tags": [
-                    "TASK"
                 ],
                 "summary": "查询任务",
                 "parameters": [
@@ -49,14 +51,16 @@
         },
         "/task": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
-                ],
-                "tags": [
-                    "TASK"
                 ],
                 "summary": "修改任务",
                 "parameters": [
@@ -86,14 +90,16 @@
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
-                ],
-                "tags": [
-                    "TASK"
                 ],
                 "summary": "创建任务",
                 "parameters": [
@@ -125,14 +131,16 @@
         },
         "/task/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
-                ],
-                "tags": [
-                    "TASK"
                 ],
                 "summary": "展示任务详细信息",
                 "parameters": [
@@ -162,14 +170,16 @@
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
-                ],
-                "tags": [
-                    "TASK"
                 ],
                 "summary": "删除任务",
                 "parameters": [
@@ -201,14 +211,16 @@
         },
         "/tasks": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
-                ],
-                "tags": [
-                    "TASK"
                 ],
                 "summary": "获取任务列表",
                 "parameters": [
@@ -246,9 +258,6 @@
                 "produces": [
                     "application/json"
                 ],
-                "tags": [
-                    "USER"
-                ],
                 "summary": "用户登录",
                 "parameters": [
                     {
@@ -284,9 +293,6 @@
                 ],
                 "produces": [
                     "application/json"
-                ],
-                "tags": [
-                    "USER"
                 ],
                 "summary": "用户注册",
                 "parameters": [
@@ -357,7 +363,8 @@
                     "$ref": "#/definitions/serializer.User"
                 },
                 "error": {
-                    "type": "string"
+                    "type": "string",
+                    "example": ""
                 },
                 "msg": {
                     "type": "string",
@@ -420,10 +427,6 @@
                     "type": "integer",
                     "example": 1
                 },
-                "status": {
-                    "description": "用户状态",
-                    "type": "string"
-                },
                 "user_name": {
                     "description": "用户名",
                     "type": "string",
@@ -438,14 +441,17 @@
             ],
             "properties": {
                 "content": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 1000
                 },
                 "status": {
                     "description": "0 待办   1已完成",
                     "type": "integer"
                 },
                 "title": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 2
                 }
             }
         },
@@ -475,13 +481,24 @@
             "properties": {
                 "password": {
                     "type": "string",
+                    "maxLength": 16,
+                    "minLength": 5,
                     "example": "FanOne666"
                 },
                 "user_name": {
                     "type": "string",
+                    "maxLength": 15,
+                    "minLength": 3,
                     "example": "FanOne"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }

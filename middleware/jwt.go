@@ -7,7 +7,7 @@ import (
 	"to-do-list/pkg/util"
 )
 
-//JWT token验证中间件
+// JWT token验证中间件
 func JWT() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var code int

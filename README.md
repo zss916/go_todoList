@@ -139,3 +139,11 @@ go mod tidy
 go run main.go
 ```
 
+
+本地运行:
+1.开启本地mysql
+2.开启本地redis
+3.run main.go
+
+
+

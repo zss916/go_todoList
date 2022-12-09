@@ -8,24 +8,25 @@ import (
 	"to-do-list/pkg/util"
 )
 
-
 var (
-	AppMode  			string
-	HttpPort 			string
-	Db         			string
-	DbHost     			string
-	DbPort     			string
-	DbUser     			string
-	DbPassWord 			string
-	DbName     			string
+	AppMode    string
+	HttpPort   string
+	Db         string
+	DbHost     string
+	DbPort     string
+	DbUser     string
+	DbPassWord string
+	DbName     string
 )
 
 func Init() {
-	file, err := ini.Load("conf/config.ini")
+	//读取本地配置文件
+	file, err := ini.Load("./conf/config.ini")
 	if err != nil {
 		util.LogrusObj.Info("配置文件读取错误，请检查文件路径:", err)
 		panic(err)
 	}
+	//读取本地国际化配置文件
 	if err := LoadLocales("conf/locales/zh-cn.yaml"); err != nil {
 		util.LogrusObj.Info(err) //日志内容
 		panic(err)
@@ -42,6 +43,7 @@ func LoadServer(file *ini.File) {
 	HttpPort = file.Section("service").Key("HttpPort").String()
 }
 
+// /mysql 配置
 func LoadMysqlData(file *ini.File) {
 	Db = file.Section("mysql").Key("Db").String()
 	DbHost = file.Section("mysql").Key("DbHost").String()

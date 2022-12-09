@@ -15,6 +15,7 @@ import (
 // @Success 200 {object} serializer.ResponseTask "{"success":true,"data":{},"msg":"ok"}"
 // @Failure 500 {json} {"status":500,"data":{},"Msg":{},"Error":"error"}
 // @Router /task [post]
+// @Security ApiKeyAuth
 func CreateTask(c *gin.Context) {
 	createService := service.CreateTaskService{}
 	chaim, _ := util.ParseToken(c.GetHeader("Authorization"))
@@ -36,6 +37,7 @@ func CreateTask(c *gin.Context) {
 // @Success 200 {object} serializer.ResponseTask "{"success":true,"data":{},"msg":"ok"}"
 // @Failure 500 {json} {"status":500,"data":{},"Msg":{},"Error":"error"}
 // @Router /tasks [get]
+// @Security ApiKeyAuth
 func ListTasks(c *gin.Context) {
 	listService := service.ListTasksService{}
 	chaim, _ := util.ParseToken(c.GetHeader("Authorization"))
@@ -57,6 +59,7 @@ func ListTasks(c *gin.Context) {
 // @Success 200 {object} serializer.ResponseTask "{"success":true,"data":{},"msg":"ok"}"
 // @Failure 500 {json} {"status":500,"data":{},"Msg":{},"Error":"error"}
 // @Router /task/:id [get]
+// @Security ApiKeyAuth
 func ShowTask(c *gin.Context) {
 	showTaskService := service.ShowTaskService{}
 	res := showTaskService.Show(c.Param("id"))
@@ -72,6 +75,7 @@ func ShowTask(c *gin.Context) {
 // @Success 200 {object} serializer.Response "{"success":true,"data":{},"msg":"ok"}"
 // @Failure 500 {json} {"status":500,"data":{},"Msg":{},"Error":"error"}
 // @Router /task/:id [delete]
+// @Security ApiKeyAuth
 func DeleteTask(c *gin.Context) {
 	deleteTaskService := service.DeleteTaskService{}
 	res := deleteTaskService.Delete(c.Param("id"))
@@ -87,6 +91,7 @@ func DeleteTask(c *gin.Context) {
 // @Success 200 {object} serializer.Response "{"success":true,"data":{},"msg":"ok"}"
 // @Failure 500 {json} {"status":500,"data":{},"Msg":{},"Error":"error"}
 // @Router /task [put]
+// @Security ApiKeyAuth
 func UpdateTask(c *gin.Context) {
 	updateTaskService := service.UpdateTaskService{}
 	if err := c.ShouldBind(&updateTaskService); err == nil {
@@ -107,6 +112,7 @@ func UpdateTask(c *gin.Context) {
 // @Success 200 {object} serializer.Response "{"success":true,"data":{},"msg":"ok"}"
 // @Failure 500 {json} {"status":500,"data":{},"Msg":{},"Error":"error"}
 // @Router /search [post]
+// @Security ApiKeyAuth
 func SearchTasks(c *gin.Context) {
 	searchTaskService := service.SearchTaskService{}
 	chaim, _ := util.ParseToken(c.GetHeader("Authorization"))

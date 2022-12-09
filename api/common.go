@@ -8,8 +8,9 @@ import (
 	"to-do-list/serializer"
 )
 
-//返回错误信息 ErrorResponse
+// 返回错误信息 ErrorResponse
 func ErrorResponse(err error) serializer.Response {
+	///验证错误
 	if ve, ok := err.(validator.ValidationErrors); ok {
 		for _, e := range ve {
 			field := conf.T(fmt.Sprintf("Field.%s", e.Field))
@@ -21,6 +22,7 @@ func ErrorResponse(err error) serializer.Response {
 			}
 		}
 	}
+	///类型不匹配
 	if _, ok := err.(*json.UnmarshalTypeError); ok {
 		return serializer.Response{
 			Status: 40001,
